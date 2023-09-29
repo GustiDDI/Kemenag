@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { images } from "../../../assets";
 import axios from 'axios';
 
-const Map = () => {
+const MapMadinah = () => {
     const mapRef = useRef(null);
     const markersRef = useRef([]);
 
@@ -58,7 +58,7 @@ const Map = () => {
         };
 
         if (!mapRef.current) {
-            const map = L.map('map').setView([21.4, 39.9], 12);
+            const map = L.map('map-madinah').setView([24.5247, 39.5692], 11);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
             mapRef.current = map;
         }
@@ -66,15 +66,18 @@ const Map = () => {
         const fetchData = () => fetchJemaahData();
         fetchData();
 
-        const interval = setInterval(fetchData, 10000); // Refresh every 10 seconds
+        const interval = setInterval(fetchData, 1000); // Refresh every 10 seconds
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, []);
 
     return (
-        <div>
-            <div id="map" style={{ height: '400px', marginTop: '20px' }}></div>
+        <div style={{
+            padding: '10px',
+            borderRadius: '10px',
+        }}>
+            <div id="map-madinah" style={{ width:'100%', height: '400px', marginTop: '5px' }}></div>
         </div>
     );
 };
 
-export default Map;
+export default MapMadinah;

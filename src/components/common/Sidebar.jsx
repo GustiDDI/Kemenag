@@ -1,29 +1,50 @@
-import DashboardCustomizeOutlinedIcon from '@mui/icons-material/DashboardCustomizeOutlined';
-import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import OtherHousesOutlinedIcon from '@mui/icons-material/OtherHousesOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Typography, colors } from '@mui/material';
 import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
 import React, { useState } from "react";
 import Animate from "./Animate";
 import { images } from "../../assets";
 import { useNavigate } from "react-router-dom";
+import StatusChecker from './notification/status';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import HotelIcon from '@mui/icons-material/Hotel';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 
 const menus = [
   {
-    title: "Inbox",
-    icon: <MailOutlinedIcon />,
-    state: "inbox"
-  },
-  {
     title: "Dashboard",
-    icon: <DashboardCustomizeOutlinedIcon />,
+    icon: <DashboardCustomizeIcon />,
     state: "dashboard"
   },
   {
-    title: "Notification",
-    icon: <NotificationsOutlinedIcon />,
+    title: "Medical Record",
+    icon: <MonitorHeartIcon />,
+    state: "medicalrecord"
+  },
+  {
+    title: "Hotel",
+    icon: <HotelIcon />,
+    state: "hotel"
+  },
+  {
+    title: "Hospital",
+    icon: <LocalHospitalIcon />,
+    state: "hospital"
+  },
+  {
+    title: "Logistic",
+    icon: <LocalShippingIcon />,
+    state: "logistic"
+  },
+  {
+    title: "Alert Notification",
+    icon: <NotificationsActiveIcon />,
     state: "notification"
   }
 ];
@@ -35,7 +56,7 @@ const serviceMenus = [
     state: "usecase"
   },
   {
-    title: "Pilgrim 360",
+    title: "Analytics Jemaah",
     icon: <HubOutlinedIcon />,
     state: "pilgrim360"
   },
@@ -46,44 +67,45 @@ const serviceMenus = [
   }
 ];
 
-const investmentMenus = [
-  {
-    title: "Coming Soon",
-    icon: <HttpsOutlinedIcon />,
-    state: "comingsoon"
-  },
-  {
-    title: "Coming Soon",
-    icon: <HttpsOutlinedIcon />,
-    state: "comingsoon"
-  },
-  {
-    title: "Coming Soon",
-    icon: <HttpsOutlinedIcon />,
-    state: "comingsoon"
-  }
-];
 
 const Sidebar = ({ sidebarWidth }) => {
-  const navigate = useNavigate(); // Hook to navigate to different routes
-  const [activeState, setActiveState] = useState('');
+  const navigate = useNavigate();
+  const [activeState, setActiveState] = useState('dashboard');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [dangerStatusCount, setDangerStatusCount] = useState(0);
 
   const handleMenuItemClick = (state) => {
     setActiveState(state);
     console.log(`Displaying results for menu state: ${state}`);
 
-    // Navigate to the appropriate route based on the state
     if (state === "dashboard") {
       navigate("/dashboard");
-    } else if (state === "inbox") {
-      navigate("/inbox");
+    } else if (state === "hotel") {
+      navigate("/hotel");
     } else if (state === "notification") {
+      // For demonstration purposes, simulate 'danger' statuses
+      const dangerStatuses = ['danger', 'danger', 'warning'];
+      setDangerStatusCount(dangerStatuses.filter(status => status === 'danger').length);
+      setSnackbarOpen(true);
       navigate("/notification");
     } else if (state === "pilgrim360") {
       navigate("/pilgrim360");
+    } else if (state === "medicalrecord") {
+      navigate("/medicalrecord");
+    } else if (state === "hospital") {
+      navigate("/hospital")
+    } else if (state === "logistic") {
+      navigate("/logistic")
     }
-    
-    // Add more conditions for other menu items if needed
+
+  };
+
+  const handleStatusUpdate = (statuses) => {
+    const dangerStatuses = statuses.filter(status => status === 'danger');
+    setDangerStatusCount(dangerStatuses.length);
+    if (dangerStatuses.length > 0) {
+      setSnackbarOpen(true);
+    }
   };
 
   const MenuItem = (props) => {
@@ -101,10 +123,12 @@ const Sidebar = ({ sidebarWidth }) => {
         <ListItemButton
           sx={{
             borderRadius: "10px",
-            bgcolor: isActive ? colors.blue[600] : "",
+            bgcolor: isActive ? colors.green[600] : "",
+            //bgcolor: isActive ? colors.blue[600] : "",
             color: isActive ? colors.common.white : "",
             "&:hover": {
-              bgcolor: isActive ? colors.blue[600] : "",
+              bgcolor: isActive ? colors.green[600] : "",
+              //bgcolor: isActive ? colors.blue[600] : "",
               color: isActive ? colors.common.white : "",
             }
           }}
@@ -140,7 +164,8 @@ const Sidebar = ({ sidebarWidth }) => {
     >
       <Box sx={{ textAlign: "center", mb: 2 }}>
         <Animate type="fade" delay={1}>
-          <img src={images.logo} alt="logo" height={100} />
+          {/*images.logo or images.kemenag*/}
+          <img src={images.kemenag} alt="logo" height={100} />
         </Animate>
       </Box>
       <Animate sx={{ flexGrow: 1 }}>
@@ -183,20 +208,6 @@ const Sidebar = ({ sidebarWidth }) => {
               />
             ))}
           </List>
-          <List>
-            <ListItem>
-              <Typography fontWeight={600} mt={1} color={colors.grey[600]}>
-                Coming Soon
-              </Typography>
-            </ListItem>
-            {investmentMenus.map((item, index) => (
-              <MenuItem
-                key={index}
-                item={item}
-                isActive={item.state === activeState}
-              />
-            ))}
-          </List>
         </Paper>
       </Animate>
     </Box>
@@ -227,6 +238,25 @@ const Sidebar = ({ sidebarWidth }) => {
       >
         {drawer}
       </Drawer>
+
+      {/* Snackbar to display "danger" status count */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          severity="error"
+          onClose={() => setSnackbarOpen(false)}
+        >
+          {`Number of "Emergency" statuses: ${dangerStatusCount}`}
+        </MuiAlert>
+      </Snackbar>
+
+      {/* StatusChecker to get statuses and trigger pop-up */}
+      <StatusChecker onStatusUpdate={handleStatusUpdate} />
     </Box>
   );
 };

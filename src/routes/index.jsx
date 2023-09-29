@@ -5,10 +5,12 @@ import DashboardPage from "../pages/dashboardpage"
 import RegisterPage from "../pages/registerpage";
 import ForgotPassword from "../pages/forgotpassword";
 import LoginPage from "../pages/loginpage";
-import MenuItem from "../pages/menuitem";
-import InboxPage from "../pages/inboxpage";
 import NotificationPage from "../pages/notificationpage";
 import Pilgrim360 from "../pages/pilgrim360";
+import MedicalRecordPage from "../pages/medicalrecordpage";
+import HotelPage from "../pages/hotelpage";
+import HospitalPage from "../pages/hospitalpage";
+import LogisticPage from "../pages/logisticpage";
 
 export const router = createBrowserRouter([
     {
@@ -30,22 +32,32 @@ export const router = createBrowserRouter([
                 ]
             },
             {
-                path:"menuitem",
+                path:"hotel",
                 element: <MainLayout />,
                 children:[
                     {
                         index: true,
-                        element: <MenuItem />
+                        element: <HotelPage />
                     }
                 ]
             },
             {
-                path:"inbox",
+                path:"hospital",
                 element: <MainLayout />,
                 children:[
                     {
                         index: true,
-                        element: <InboxPage />
+                        element: <HospitalPage />
+                    }
+                ]
+            },
+            {
+                path:"logistic",
+                element: <MainLayout />,
+                children:[
+                    {
+                        index: true,
+                        element: <LogisticPage />
                     }
                 ]
             },
@@ -66,6 +78,16 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         element: <Pilgrim360 />
+                    }
+                ]
+            },
+            {
+                path:"medicalrecord",
+                element: <MainLayout />,
+                children:[
+                    {
+                        index: true,
+                        element: <MedicalRecordPage />
                     }
                 ]
             },

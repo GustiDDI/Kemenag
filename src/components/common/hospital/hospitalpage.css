@@ -1,0 +1,26 @@
+/* hotelpage.css */
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .chart-section, .map-section {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  .chart-container, .map-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Set a max height and enable scrollbar for the hospital lists */
+  .map-container.map {
+    max-height: 300px; /* Adjust the max height as needed */
+    overflow-y: auto;
+  }
+  

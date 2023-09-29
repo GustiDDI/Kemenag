@@ -10,6 +10,13 @@ const GenderDonutChart = () => {
         type: 'donut',
       },
       labels: ['Male', 'Female'],
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '50%', // Adjust the size of the donut hole
+          },
+        },
+      },
     },
   });
 
@@ -31,6 +38,13 @@ const GenderDonutChart = () => {
               type: 'donut',
             },
             labels: ['Male', 'Female'],
+            plotOptions: {
+              pie: {
+                donut: {
+                  size: '50%', // Adjust the size of the donut hole
+                },
+              },
+            },
           },
         });
       } catch (error) {
@@ -46,7 +60,7 @@ const GenderDonutChart = () => {
       options={chartData.options}
       series={chartData.series}
       type="donut"
-      width="450"
+      width="500"
     />
   );
 };

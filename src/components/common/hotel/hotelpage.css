@@ -1,0 +1,41 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .chart-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .chart {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  .map-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .map {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  .center-text {
+    text-align: center;
+  }
+  
+  .chart-container,
+  .map-container {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+  }
+  

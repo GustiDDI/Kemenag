@@ -1,0 +1,11 @@
+.round-button {
+    border-radius: 30px; /* Membuat tombol bulat */
+    padding: 15px 25px;
+    font-size: 16px;
+  }
+  
+  .round-button:hover {
+    background-color: #ec1010; /* Warna latar belakang saat hover */
+    color: white;
+  }
+  

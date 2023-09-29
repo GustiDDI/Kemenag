@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Box, Button, Checkbox, FormControlLabel, Stack, TextField, Typography, colors, CircularProgress, circularProgressClasses } from "@mui/material";
+import { Box, Button, Checkbox, CircularProgress, FormControlLabel, FormGroup, Stack, TextField, Typography, colors } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { images } from "../assets";
 import Animate from "../components/common/Animate";
+import { ReactComponent as GoogleLogo } from '../assets/goggle.svg'; // Sesuaikan path ke logo Google SVG Anda
+import { images } from "../assets";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-
   const [onRequest, setOnRequest] = useState(false);
-  const [registerProgress, setRegisterProgress] = useState(0);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [registerProgress, setRegisterProgress] = useState(0);
 
   const onRegister = (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const RegisterPage = () => {
     }, 2100);
 
     setTimeout(() => {
-      navigate("/");
+      navigate("/login");
     }, 3300);
   };
 
@@ -36,146 +36,127 @@ const RegisterPage = () => {
     <Box
       position="relative"
       height="100vh"
-      sx={{ "::-webkit-scrollbar": { display: "none" } }}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      sx={{
+        "::-webkit-scrollbar": { display: "none" },
+        backgroundColor: '#FFFFFF',  // Set light blue background color
+        webkitFontSmoothing: 'antialiased',
+        webkitTextSizeAdjust: '100%',
+        color: 'rgba(0, 0, 0, 0.87)',
+        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+        fontWeight: 400,
+        fontSize: '1rem',
+        lineHeight: 1.5,
+        letterSpacing: '0.00938em',
+        boxSizing: 'inherit',
+        position: 'relative',
+      }}
     >
-      {/* Background box */}
-      <Box
-        sx={{
-          position: "absolute",
-          right: 0,
-          height: "100%",
-          width: "60%",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundImage: `url(${images.loginBg})`
-        }}
-      />
-      {/* Background box */}
-
-      {/* Registration form */}
-      <Box
-        sx={{
-          position: "absolute",
-          left: 0,
-          height: "100%",
-          width: isRegistered
-            ? "100%"
-            : { xl: "30%", lg: "40%", md: "50%", xs: "100%" },
-          transition: "all 1s ease-in-out",
-          bgcolor: colors.common.white
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            opacity: isRegistered ? 0 : 1,
-            transition: "all 0.3s ease-in-out",
-            height: "100%",
-            "::-webkit-scrollbar": { display: "none" }
-          }}
-        >
-          {/* Logo */}
-          <Box sx={{ textAlign: "center", p: 5 }}>
-            <Animate type="fade" delay={0.5}>
-              <img src={images.logo} alt="logo" height={140} />
-              <Typography variant="h6" color="textSecondary" sx={{ color: "black" }}>
-                Register to create an account
-              </Typography>
-            </Animate>
+      {/* Register form */}
+      <Animate type="fade" delay={0.3}>
+        <Box sx={{
+          width: "100%",
+          maxWidth: 400,
+          bgcolor: colors.common.white,
+          borderRadius: 8,
+          p: 5,
+          opacity: isRegistered ? 0 : 1,
+          transition: "all 0.3s ease-in-out",
+        }}>
+          <Box sx={{ textAlign: "center", mb: 3 }}>
+            <img src={images.kemenag} alt="logo" height={200} />
+            <Typography variant="h6" color="textSecondary" sx={{ color: "black" }}>
+              Register to create your account
+            </Typography>
           </Box>
-          {/* Logo */}
-
-          {/* Form */}
-          <Box
-            sx={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
+          <Animate type="fade" delay={0.7}>
+            <Box sx={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              "::-webkit-scrollbar": { display: "none" }
-            }}
-          >
-            <Animate delay={2.5}>
-              <Box component="form" maxWidth={400} width="100%" onSubmit={onRegister}>
+              flexDirection: "column",
+            }}>
+              <form onSubmit={onRegister}>
                 <Stack spacing={3}>
                   <TextField label="Full Name" fullWidth required />
                   <TextField label="Email" fullWidth required />
                   <TextField label="Password" type="password" fullWidth required />
-                  <Button type="submit" size="large" variant="contained" color="primary">
-                    sign up
-                  </Button>
-                  <Stack direction="row" justifyContent="space-between" alignItems="center">
+                  {/* Menggunakan komponen Checkbox, FormControlLabel, dan FormGroup */}
+                  <FormGroup>
                     <FormControlLabel control={<Checkbox />} label="I agree to the terms and conditions" />
-                  </Stack>
+                  </FormGroup>
+                  <Button
+                    type="submit"
+                    size="large"
+                    variant="contained"
+                    //color="primary"
+                    color="success"
+                    sx={{ mt: 2, textTransform: 'none' }}
+                  >
+                    Register
+                  </Button>
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    startIcon={<GoogleLogo width={24} height={24} />}
+                    sx={{
+                      mt: 2,
+                      backgroundColor: "white",
+                      color: "black",
+                      textTransform: 'none',
+                      '&:hover': {
+                        backgroundColor: "#f1f3f4",
+                      },
+                    }}
+                  >
+                    Register with Google
+                  </Button>
                 </Stack>
-              </Box>
-            </Animate>
-          </Box>
-          {/* Form */}
-          {/* Footer */}
-          <Box sx={{ textAlign: "center", p: 5, zIndex: 2 }}>
-            <Animate delay={2.5}>
-              <Typography
-                display="inline"
-                fontWeight="bold"
-                sx={{ "& > a": { color: colors.red[900], ml: "5px" } }}
-              >
-                Have an account? -
-                <Link to="/">
-                  Login now
-                </Link>
-              </Typography>
-            </Animate>
-          </Box>
-          {onRequest && (
-            <Stack
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                height: "100%",
-                width: "100%",
-                position: "absolute",
-                top: 0,
-                left: 0,
-                bgcolor: colors.common.white,
-                zIndex: 1000
-              }}
-            >
-              <Box position="relative">
-                <CircularProgress
-                  variant="determinate"
-                  sx={{ color: colors.grey[200] }}
-                  size={100}
-                  value={100}
-                />
-                <CircularProgress
-                  variant="determinate"
-                  disableShrink
-                  value={registerProgress}
-                  size={100}
-                  sx={{
-                    [`& .${circularProgressClasses.circle}`]: {
-                      strokeLinecap: "round"
-                    },
-                    position: "absolute",
-                    left: 0,
-                    color: colors.blue[600]
-                  }}
-                />
-              </Box>
-            </Stack>
-          )}
-          {/* loading box */}
+              </form>
+            </Box>
+          </Animate>
         </Box>
-      </Box>
-      {/* Login form */}
+      </Animate>
+      {/* Register form */}
+
+      {/* Loading box */}
+      {onRequest && (
+        <Animate type="fade" delay={0.7}>
+          <Box sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            bgcolor: "rgba(255, 255, 255, 0.8)",
+            zIndex: 1000,
+          }}>
+            <CircularProgress size={100} value={registerProgress} color="primary" />
+          </Box>
+        </Animate>
+      )}
+      {/* Loading box */}
+
+      {/* Footer */}
+        <Box sx={{
+          mt: 1,
+          textAlign: "center",
+          fontSize: 15,
+          fontWeight: "bold",
+          color: "black",
+        }}>
+          Already have an account?{" "}
+          <Link to="/" style={{ color: colors.red[900], textDecoration: 'none' }}>
+            Login now
+          </Link>
+        </Box>
+      {/* Footer */}
     </Box>
   );
 };

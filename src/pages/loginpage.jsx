@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Checkbox, CircularProgress, FormControlLabel, FormGroup, Stack, TextField, Typography, colors } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Animate from "../components/common/Animate";
-import { ReactComponent as GoogleLogo } from '../assets/goggle.svg'; // Adjust the path to your Google logo SVG
+import { ReactComponent as GoogleLogo } from '../assets/goggle.svg'; // Sesuaikan path ke logo Google SVG Anda
 import { images } from "../assets";
 
 const LoginPage = () => {
@@ -28,7 +28,7 @@ const LoginPage = () => {
     }, 2100);
 
     setTimeout(() => {
-      navigate("/menuitem");
+      navigate("/dashboard");
     }, 3300);
   };
 
@@ -40,7 +40,20 @@ const LoginPage = () => {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ "::-webkit-scrollbar": { display: "none" } }}
+      sx={{
+        "::-webkit-scrollbar": { display: "none" },
+        backgroundColor: '#FFFFFF',  // Set light blue background color
+        webkitFontSmoothing: 'antialiased',
+        webkitTextSizeAdjust: '100%',
+        color: 'rgba(0, 0, 0, 0.87)',
+        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+        fontWeight: 400,
+        fontSize: '1rem',
+        lineHeight: 1.5,
+        letterSpacing: '0.00938em',
+        boxSizing: 'inherit',
+        position: 'relative',
+      }}
     >
       {/* Login form */}
       <Animate type="fade" delay={0.3}>
@@ -54,9 +67,7 @@ const LoginPage = () => {
           transition: "all 0.3s ease-in-out",
         }}>
           <Box sx={{ textAlign: "center", mb: 3 }}>
-            <Animate type="zoom" delay={0.5}>
-              <img src={images.logo} alt="logo" height={200} />
-            </Animate>
+              <img src={images.kemenag} alt="logo" height={200} />
             <Typography variant="h6" color="textSecondary" sx={{ color: "black" }}>
               Login to access your dashboard
             </Typography>
@@ -68,17 +79,15 @@ const LoginPage = () => {
             }}>
               <form onSubmit={onSignin}>
                 <Stack spacing={3}>
-                  <Typography variant="button" sx={{ textTransform: "none" }}>
-                    Sign In
-                  </Typography>
                   <TextField label="Email" fullWidth required />
                   <TextField label="Password" type="password" fullWidth required />
                   <Button
                     type="submit"
                     size="large"
                     variant="contained"
-                    color="primary"
-                    sx={{ mt: 2 }} // Adjust the margin as needed
+                    //color="primary"
+                    color="success"
+                    sx={{ mt: 2, textTransform: 'none' }}
                   >
                     Sign In
                   </Button>
@@ -89,11 +98,11 @@ const LoginPage = () => {
                     startIcon={<GoogleLogo width={24} height={24} />}
                     sx={{
                       mt: 2,
-                      backgroundColor: "white", // Set the background color to white
-                      color: "black", // Set the text color to black
-                      textTransform: "none", // Set text to normal (not in uppercase)
+                      backgroundColor: "white",
+                      color: "black",
+                      textTransform: 'none',
                       '&:hover': {
-                        backgroundColor: "#f1f3f4", // Adjust hover background color if needed
+                        backgroundColor: "#f1f3f4",
                       },
                     }}
                   >
@@ -104,7 +113,7 @@ const LoginPage = () => {
                       <FormControlLabel control={<Checkbox />} label="Remember me" />
                     </FormGroup>
                     <Typography color="error" fontWeight="bold">
-                      <Link to="forgotpassword">
+                      <Link to="forgotpassword" style={{ color: colors.red[900], textDecoration: 'none', fontWeight: 'bold' }}>
                         Forgot password?
                       </Link>
                     </Typography>
@@ -140,19 +149,18 @@ const LoginPage = () => {
       {/* Loading box */}
 
       {/* Footer */}
-      <Animate type="slide-up" delay={1}>
         <Box sx={{
           mt: 5,
           textAlign: "center",
-          fontSize: 14,
-          color: "text.secondary",
+          fontSize: 15,
+          fontWeight: "bold",
+          color: "black",
         }}>
           Don't have an account?{" "}
-          <Link to="register" style={{ color: colors.red[900] }}>
+          <Link to="register" style={{ color: colors.red[900], textDecoration: 'none' }}>
             Register now
           </Link>
         </Box>
-      </Animate>
       {/* Footer */}
     </Box>
   );

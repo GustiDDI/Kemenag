@@ -9,5 +9,9 @@ export const images = {
     bookingImage: require("./images/cherry-blossoms-fuji-mountain-spring-sunrise-shizuoka-japan.jpg"),
     logo: require("./images/NewPeruriGraphBACKGROUND.png"),
     safe: require("./images/mark.png"),
-    danger: require("./images/danger.gif")
+    danger: require("./images/danger.gif"),
+    foto: require("./images/foto.jpeg"),
+    redmark: require("./images/redmark.png"),
+    bluemark: require("./images/bluemark.png"),
+    kemenag: require("./images/kemenag.png")
 };

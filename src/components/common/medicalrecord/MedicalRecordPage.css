@@ -1,0 +1,30 @@
+/* MedicalRecordPage.css */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.chart-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.chart {
+  width: 48%;
+  margin-bottom: 20px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Add more styles as needed */
