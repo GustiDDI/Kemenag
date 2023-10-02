@@ -11,6 +11,7 @@ import MedicalRecordPage from "../pages/medicalrecordpage";
 import HotelPage from "../pages/hotelpage";
 import HospitalPage from "../pages/hospitalpage";
 import LogisticPage from "../pages/logisticpage";
+import Pilgrim from "../pages/pilgrim";
 
 export const router = createBrowserRouter([
     {
@@ -78,6 +79,16 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         element: <Pilgrim360 />
+                    }
+                ]
+            },
+            {
+                path:"pilgrim",
+                element: <MainLayout />,
+                children:[
+                    {
+                        index: true,
+                        element: <Pilgrim />
                     }
                 ]
             },

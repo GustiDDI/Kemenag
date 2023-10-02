@@ -2,7 +2,6 @@ import OtherHousesOutlinedIcon from '@mui/icons-material/OtherHousesOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Typography, colors } from '@mui/material';
-import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
 import React, { useState } from "react";
 import Animate from "./Animate";
 import { images } from "../../assets";
@@ -15,7 +14,7 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
-
+import HubIcon from '@mui/icons-material/Hub';
 const menus = [
   {
     title: "Dashboard",
@@ -51,14 +50,14 @@ const menus = [
 
 const serviceMenus = [
   {
-    title: "Use Case",
-    icon: <OtherHousesOutlinedIcon />,
-    state: "usecase"
+    title: "Analytics Jemaah",
+    icon: <HubIcon />,
+    state: "pilgrim360"
   },
   {
-    title: "Analytics Jemaah",
-    icon: <HubOutlinedIcon />,
-    state: "pilgrim360"
+    title: "Jemaah 360",
+    icon: <HubIcon />,
+    state: "pilgrim"
   },
   {
     title: "Coming Soon",
@@ -90,6 +89,8 @@ const Sidebar = ({ sidebarWidth }) => {
       navigate("/notification");
     } else if (state === "pilgrim360") {
       navigate("/pilgrim360");
+    } else if (state === "pilgrim") {
+      navigate("/pilgrim");
     } else if (state === "medicalrecord") {
       navigate("/medicalrecord");
     } else if (state === "hospital") {
